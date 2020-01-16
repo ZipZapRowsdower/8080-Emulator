@@ -1,0 +1,12 @@
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(emulator_test emulator_test.cpp)
+target_link_libraries(emulator_test ${GTEST_LIBRARIES} pthread)
+add_test(NAME emulator_test
+         COMMAND emulator_test)
+
+add_executable(states_test states_test.cpp ${PROJECT_SOURCE_DIR}/src/states.cpp)
+target_link_libraries(states_test ${GTEST_LIBRARIES} pthread)
+add_test(NAME states_test
+         COMMAND states_test ${PROJECT_SOURCE_DIR}/test/test_file)
