@@ -41,7 +41,7 @@ State8080::State8080(const std::vector<uint8_t> memory, const uint8_t a,
                      const uint8_t int_enable, const ConditionCodes cc)
                      : memory(ROM_SIZE, 0x00) {
   // TODO: What if memory.size() > ROM_SIZE?
-  for (int i = 0; i < memory.size(); i++) {
+  for (unsigned int i = 0; i < memory.size(); i++) {
     this->memory[i] = memory[i];
   }
   this->a = a;
@@ -71,7 +71,7 @@ void State8080::ClearState() {
   this->e = 0;
   this->h = 0;
   this->l = 0;
-  for (int i = 0; i < this->memory.size(); i++) {
+  for (unsigned int i = 0; i < this->memory.size(); i++) {
     this->memory[i] = 0x00;
   }
   this->sp = 0;

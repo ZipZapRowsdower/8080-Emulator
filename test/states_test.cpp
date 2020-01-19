@@ -84,7 +84,7 @@ TEST_F(State8080Test, DefaultInitialization) {
   EXPECT_EQ(0, state->sp);
   EXPECT_EQ(0, state->pc);
   EXPECT_EQ(ROM_SIZE, state->memory.size());
-  for (int i = 0; i < ROM_SIZE; i++) {
+  for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state->memory[i]);
   }
   EXPECT_EQ(0, state->cc.z);
@@ -108,10 +108,10 @@ TEST_F(State8080Test, FullInitialization) {
   EXPECT_EQ(pc_2, state_2->pc);
   EXPECT_EQ(int_enable_2, state_2->int_enable);
   EXPECT_EQ(ROM_SIZE, state_2->memory.size());
-  for (int i = 0; i < memory_2.size(); i++) {
+  for (unsigned int i = 0; i < memory_2.size(); i++) {
     EXPECT_EQ(memory_2[i], state_2->memory[i]);
   }
-  for (int i = memory_2.size(); i < ROM_SIZE; i++) {
+  for (unsigned int i = memory_2.size(); i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
   EXPECT_EQ(z_2, state_2->cc.z);
@@ -135,7 +135,7 @@ TEST_F(State8080Test, CopyInitialization) {
   EXPECT_EQ(state_2->sp, my_state->sp);
   EXPECT_EQ(state_2->pc, my_state->pc);
   EXPECT_EQ(state_2->memory.size(), my_state->memory.size());
-  for (int i = 0; i < my_state->memory.size(); i++) {
+  for (unsigned int i = 0; i < my_state->memory.size(); i++) {
     EXPECT_EQ(state_2->memory[i], my_state->memory[i]);
   }
   EXPECT_EQ(state_2->cc.z, my_state->cc.z);
@@ -163,7 +163,7 @@ TEST_F(State8080Test, StateFreed) {
   EXPECT_EQ(0, state_2->sp);
   EXPECT_EQ(0, state_2->pc);
   EXPECT_EQ(ROM_SIZE, state_2->memory.size());
-  for (int i = 0; i < ROM_SIZE; i++) {
+  for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
   EXPECT_EQ(0, state_2->cc.z);
@@ -201,7 +201,7 @@ TEST_F(State8080Test, LoadMemoryFromBuffer) {
   unsigned char buffer[4] = {0x86, 0x75, 0x30, 0x90};
   state->LoadMemory(buffer, 4);
 
-  for (int i = 0; i < 4; i++) {
+  for (unsigned int i = 0; i < 4; i++) {
     EXPECT_EQ(buffer[i], state->memory[i]);
   }
 }
@@ -217,7 +217,7 @@ TEST_F(State8080Test, LoadMemoryFromFile) {
   // Duplication
   state->LoadMemory(f);
   unsigned char results[9] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x09, 0x08};
-  for (int i = 0; i < 9; i++) {
+  for (unsigned int i = 0; i < 9; i++) {
     EXPECT_EQ(results[i], state->memory[i]);
   }
 }
