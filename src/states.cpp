@@ -25,6 +25,7 @@ State8080::State8080(const State8080& obj) {
   this->memory = obj.memory;
   this->sp = obj.sp;
   this->pc = obj.pc;
+  this->int_enable = obj.int_enable;
   this->cc = obj.cc;
 }
 

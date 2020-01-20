@@ -25,13 +25,13 @@ const static uint8_t h_2 = 0x66;
 const static uint8_t l_2 = 0x70;
 const static uint16_t sp_2 = 0xDEAD;
 const static uint16_t pc_2 = 0xBEEF;
-const static uint8_t int_enable_2 = 0;
-const static uint8_t z_2 = 0;
+const static uint8_t int_enable_2 = 1;
+const static uint8_t z_2 = 1;
 const static uint8_t s_2 = 1;
 const static uint8_t p_2 = 1;
 const static uint8_t cy_2 = 1;
-const static uint8_t ac_2 = 0;
-const static uint8_t pad_2 = 0;
+const static uint8_t ac_2 = 1;
+const static uint8_t pad_2 = 1;
 
 struct State8080Test : testing::Test {
   State8080* state;
@@ -166,7 +166,7 @@ TEST_F(State8080Test, ToString1) {
 }
 
 TEST_F(State8080Test, ToString2) {
-  std::string expected = "        C=1, P=1, S=1, Z=0\n        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
+  std::string expected = "        C=1, P=1, S=1, Z=1\n        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
   std::string actual = state_2->ToString();
   EXPECT_EQ(expected, actual);
 }
@@ -208,7 +208,7 @@ TEST_F(State8080Test, LoadMemoryFromFile) {
 ////////////////////////////////////////////////////
 
 TEST_F(State8080Test, StreamInsertionOverload) {
-  std::string expected = "        C=1, P=1, S=1, Z=0\n        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
+  std::string expected = "        C=1, P=1, S=1, Z=1\n        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
 
   std::ostringstream buffer;
   buffer << *state_2;
