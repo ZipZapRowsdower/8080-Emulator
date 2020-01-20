@@ -13,7 +13,8 @@ class ConditionCodes {
   friend std::ostream& operator<<(std::ostream&, const ConditionCodes&);
   bool operator==(const ConditionCodes&) const;
   bool operator!=(const ConditionCodes&) const;
-  void Reset();
+  void Clear();
+  bool IsClear() const;
   std::string ToString() const;
   uint8_t z:1;
   uint8_t s:1;

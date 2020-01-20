@@ -70,10 +70,15 @@ TEST_F(ProcessorTest, CopyConstructorInitialization) {
   delete my_cc;
 }
 
-TEST_F(ProcessorTest, Reset) {
-  cc_2->Reset();
+TEST_F(ProcessorTest, Clear) {
+  cc_2->Clear();
 
   EXPECT_EQ(true, cc_1->operator==(*cc_2));
+}
+
+TEST_F(ProcessorTest, IsClear) {
+  EXPECT_EQ(true, cc_1->IsClear());
+  EXPECT_EQ(false, cc_2->IsClear());
 }
 
 ////////////////////////
@@ -151,7 +156,6 @@ TEST_F(ProcessorTest, NotEqualityOperatorOverload) {
   EXPECT_EQ(false, cc_2->operator!=(*cc_3));
   EXPECT_EQ(false, cc_3->operator!=(*cc_2));
 }
-
 
 ////////////////////////////
 // ___  ___      _        //

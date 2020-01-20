@@ -65,7 +65,7 @@ void State8080::ClearState() {
   }
   this->sp = 0;
   this->pc = 0;
-  this->cc.Reset();
+  this->cc.Clear();
   this->int_enable = 0;
 }
 

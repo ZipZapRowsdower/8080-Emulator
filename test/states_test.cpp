@@ -41,13 +41,7 @@ struct State8080Test : testing::Test {
 
   State8080Test()
   {
-    cc_2 = new ConditionCodes;
-    cc_2->z = z_2;
-    cc_2->s = s_2;
-    cc_2->p = p_2;
-    cc_2->cy = cy_2;
-    cc_2->ac = ac_2;
-    cc_2->pad = pad_2;
+    cc_2 = new ConditionCodes(z_2, s_2, p_2, cy_2, ac_2, pad_2);
 
     state = new State8080;
     state_2 = new State8080(memory_2, a_2, b_2, c_2, d_2, e_2, h_2, l_2,
@@ -87,12 +81,7 @@ TEST_F(State8080Test, DefaultInitialization) {
   for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state->memory[i]);
   }
-  EXPECT_EQ(0, state->cc.z);
-  EXPECT_EQ(0, state->cc.s);
-  EXPECT_EQ(0, state->cc.p);
-  EXPECT_EQ(0, state->cc.cy);
-  EXPECT_EQ(0, state->cc.ac);
-  EXPECT_EQ(0, state->cc.pad);
+  EXPECT_EQ(true, state->cc.IsClear());
   EXPECT_EQ(0, state->int_enable);
 }
 
@@ -114,12 +103,7 @@ TEST_F(State8080Test, FullInitialization) {
   for (unsigned int i = memory_2.size(); i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
-  EXPECT_EQ(z_2, state_2->cc.z);
-  EXPECT_EQ(s_2, state_2->cc.s);
-  EXPECT_EQ(p_2, state_2->cc.p);
-  EXPECT_EQ(cy_2, state_2->cc.cy);
-  EXPECT_EQ(ac_2, state_2->cc.ac);
-  EXPECT_EQ(pad_2, state_2->cc.pad);
+  EXPECT_EQ(true, cc_2->operator==(state_2->cc));
 }
 
 TEST_F(State8080Test, CopyInitialization) {
@@ -138,12 +122,7 @@ TEST_F(State8080Test, CopyInitialization) {
   for (unsigned int i = 0; i < my_state->memory.size(); i++) {
     EXPECT_EQ(state_2->memory[i], my_state->memory[i]);
   }
-  EXPECT_EQ(state_2->cc.z, my_state->cc.z);
-  EXPECT_EQ(state_2->cc.s, my_state->cc.s);
-  EXPECT_EQ(state_2->cc.p, my_state->cc.p);
-  EXPECT_EQ(state_2->cc.cy, my_state->cc.cy);
-  EXPECT_EQ(state_2->cc.ac, my_state->cc.ac);
-  EXPECT_EQ(state_2->cc.pad, my_state->cc.pad);
+  EXPECT_EQ(true, state_2->cc.operator==(my_state->cc));
   EXPECT_EQ(state_2->int_enable, my_state->int_enable);
 
   // Can this lead to a memory leak?  Google Test should always run the full
@@ -166,12 +145,7 @@ TEST_F(State8080Test, StateFreed) {
   for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
-  EXPECT_EQ(0, state_2->cc.z);
-  EXPECT_EQ(0, state_2->cc.s);
-  EXPECT_EQ(0, state_2->cc.p);
-  EXPECT_EQ(0, state_2->cc.cy);
-  EXPECT_EQ(0, state_2->cc.ac);
-  EXPECT_EQ(0, state_2->cc.pad);
+  EXPECT_EQ(true, state_2->cc.IsClear());
   EXPECT_EQ(0, state_2->int_enable);
 }
 

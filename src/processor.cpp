@@ -5,7 +5,7 @@
 #include <sstream>
 
 ConditionCodes::ConditionCodes() {
-  this->Reset();
+  this->Clear();
 }
 
 ConditionCodes::ConditionCodes(uint8_t z, uint8_t s, uint8_t p, uint8_t cy,
@@ -69,7 +69,16 @@ std::string ConditionCodes::ToString() const {
   return my_string_stream.str();
 }
 
-void ConditionCodes::Reset() {
+bool ConditionCodes::IsClear() const {
+  return (this->z == 0) &&
+         (this->s == 0) &&
+         (this->p == 0) &&
+         (this->cy == 0) &&
+         (this->ac == 0) &&
+         (this->pad == 0);
+}
+
+void ConditionCodes::Clear() {
   this->z = 0;
   this->s = 0;
   this->p = 0;
