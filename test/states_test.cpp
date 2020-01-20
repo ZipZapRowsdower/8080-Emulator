@@ -119,6 +119,78 @@ TEST_F(State8080Test, StateFreed) {
   EXPECT_EQ(true, state_2->cc.IsClear());
 }
 
+//////////////////////////////////////////////////
+//   ___                                        //
+//  / _ \                                       //
+// / /_\ \ ___ ___ ___  ___ ___  ___  _ __ ___  //
+// |  _  |/ __/ __/ _ \/ __/ __|/ _ \| '__/ __| //
+// | | | | (_| (_|  __/\__ \__ \ (_) | |  \__ \ //
+// \_| |_/\___\___\___||___/___/\___/|_|  |___/ //
+//                                              //
+//////////////////////////////////////////////////
+
+TEST_F(State8080Test, AllAccessors) {
+  EXPECT_EQ(a_2, state_2->get_a());
+  EXPECT_EQ(b_2, state_2->get_b());
+  EXPECT_EQ(c_2, state_2->get_c());
+  EXPECT_EQ(d_2, state_2->get_d());
+  EXPECT_EQ(e_2, state_2->get_e());
+  EXPECT_EQ(h_2, state_2->get_h());
+  EXPECT_EQ(l_2, state_2->get_l());
+  EXPECT_EQ(sp_2, state_2->get_sp());
+  EXPECT_EQ(pc_2, state_2->get_pc());
+  EXPECT_EQ(z_2, state_2->get_z());
+  EXPECT_EQ(s_2, state_2->get_s());
+  EXPECT_EQ(p_2, state_2->get_p());
+  EXPECT_EQ(cy_2, state_2->get_cy());
+  EXPECT_EQ(ac_2, state_2->get_ac());
+  EXPECT_EQ(pad_2, state_2->get_pad());
+}
+
+///////////////////////////////////////////////
+// ___  ___      _        _                  //
+// |  \/  |     | |      | |                 //
+// | .  . |_   _| |_ __ _| |_ ___  _ __ ___  //
+// | |\/| | | | | __/ _` | __/ _ \| '__/ __| //
+// | |  | | |_| | || (_| | || (_) | |  \__ \ //
+// \_|  |_/\__,_|\__\__,_|\__\___/|_|  |___/ //
+//                                           //
+///////////////////////////////////////////////
+
+TEST_F(State8080Test, AllMutators) {
+  state_3->set_a(a_2);
+  state_3->set_b(b_2);
+  state_3->set_c(c_2);
+  state_3->set_d(d_2);
+  state_3->set_e(e_2);
+  state_3->set_h(h_2);
+  state_3->set_l(l_2);
+  state_3->set_sp(sp_2);
+  state_3->set_pc(pc_2);
+  state_3->set_z(z_2);
+  state_3->set_s(s_2);
+  state_3->set_p(p_2);
+  state_3->set_cy(cy_2);
+  state_3->set_ac(ac_2);
+  state_3->set_pad(pad_2);
+
+  EXPECT_EQ(a_2, state_3->get_a());
+  EXPECT_EQ(b_2, state_3->get_b());
+  EXPECT_EQ(c_2, state_3->get_c());
+  EXPECT_EQ(d_2, state_3->get_d());
+  EXPECT_EQ(e_2, state_3->get_e());
+  EXPECT_EQ(h_2, state_3->get_h());
+  EXPECT_EQ(l_2, state_3->get_l());
+  EXPECT_EQ(sp_2, state_3->get_sp());
+  EXPECT_EQ(pc_2, state_3->get_pc());
+  EXPECT_EQ(z_2, state_3->get_z());
+  EXPECT_EQ(s_2, state_3->get_s());
+  EXPECT_EQ(p_2, state_3->get_p());
+  EXPECT_EQ(cy_2, state_3->get_cy());
+  EXPECT_EQ(ac_2, state_3->get_ac());
+  EXPECT_EQ(pad_2, state_3->get_pad());
+}
+
 ////////////////////////
 //  _____    _______  //
 // |_   _|  / /  _  | //

@@ -34,6 +34,37 @@ State8080::State8080(const std::vector<uint8_t> memory,
   this->cc = cc;
 }
 
+uint8_t State8080::get_a() const { return this->regs.get_a(); }
+uint8_t State8080::get_b() const { return this->regs.get_b(); }
+uint8_t State8080::get_c() const { return this->regs.get_c(); }
+uint8_t State8080::get_d() const { return this->regs.get_d(); }
+uint8_t State8080::get_e() const { return this->regs.get_e(); }
+uint8_t State8080::get_h() const { return this->regs.get_h(); }
+uint8_t State8080::get_l() const { return this->regs.get_l(); }
+uint16_t State8080::get_sp() const { return this->regs.get_sp(); }
+uint16_t State8080::get_pc() const { return this->regs.get_pc(); }
+uint8_t State8080::get_z() const { return this->cc.get_z(); }
+uint8_t State8080::get_s() const { return this->cc.get_s(); }
+uint8_t State8080::get_p() const { return this->cc.get_p(); }
+uint8_t State8080::get_cy() const { return this->cc.get_cy(); }
+uint8_t State8080::get_ac() const { return this->cc.get_ac(); }
+uint8_t State8080::get_pad() const { return this->cc.get_pad(); }
+
+void State8080::set_a(const uint8_t a) { this->regs.set_a(a); }
+void State8080::set_b(const uint8_t b) { this->regs.set_b(b); }
+void State8080::set_c(const uint8_t c) { this->regs.set_c(c); }
+void State8080::set_d(const uint8_t d) { this->regs.set_d(d); }
+void State8080::set_e(const uint8_t e) { this->regs.set_e(e); }
+void State8080::set_h(const uint8_t h) { this->regs.set_h(h); }
+void State8080::set_l(const uint8_t l) { this->regs.set_l(l); }
+void State8080::set_sp(const uint16_t sp) { this->regs.set_sp(sp); }
+void State8080::set_pc(const uint16_t pc) { this->regs.set_pc(pc); }
+void State8080::set_z(const uint8_t z) { this->cc.set_z(z); }
+void State8080::set_s(const uint8_t s) { this->cc.set_s(s); }
+void State8080::set_p(const uint8_t p) { this->cc.set_p(p); }
+void State8080::set_cy(const uint8_t cy) { this->cc.set_cy(cy); }
+void State8080::set_ac(const uint8_t ac) { this->cc.set_ac(ac); }
+void State8080::set_pad(const uint8_t pad) { this->cc.set_pad(pad); }
 
 void State8080::ClearState() {
   for (unsigned int i = 0; i < this->memory.size(); i++) {
