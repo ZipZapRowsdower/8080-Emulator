@@ -27,6 +27,17 @@ class ConditionCodes {
 // All registers except the status register
 class Registers {
  public:
+  Registers();
+  Registers(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t,
+            uint16_t, uint16_t);
+  Registers(const Registers&);
+  Registers& operator=(const Registers&);
+  friend std::ostream& operator<<(std::ostream&, const Registers&);
+  bool operator==(const Registers&) const;
+  bool operator!=(const Registers&) const;
+  void Clear();
+  bool IsClear() const;
+  std::string ToString() const;
   uint8_t a;
   uint8_t b;
   uint8_t c;
