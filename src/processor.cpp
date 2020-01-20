@@ -56,6 +56,40 @@ Registers::Registers(const Registers& obj) {
   this->pc = obj.pc;
 }
 
+uint8_t ConditionCodes::get_z() { return this->z; }
+uint8_t ConditionCodes::get_s() { return this->s; }
+uint8_t ConditionCodes::get_p() { return this->p; }
+uint8_t ConditionCodes::get_cy() { return this->cy; }
+uint8_t ConditionCodes::get_ac() { return this->ac; }
+uint8_t ConditionCodes::get_pad() { return this->pad; }
+
+uint8_t Registers::get_a() { return this->a; }
+uint8_t Registers::get_b() { return this->b; }
+uint8_t Registers::get_c() { return this->c; }
+uint8_t Registers::get_d() { return this->d; }
+uint8_t Registers::get_e() { return this->e; }
+uint8_t Registers::get_h() { return this->h; }
+uint8_t Registers::get_l() { return this->l; }
+uint16_t Registers::get_sp() { return this->sp; }
+uint16_t Registers::get_pc() { return this->pc; }
+
+void ConditionCodes::set_z(const uint8_t z) { this->z = z; }
+void ConditionCodes::set_s(const uint8_t s) { this->s = s; }
+void ConditionCodes::set_p(const uint8_t p) { this->p = p; }
+void ConditionCodes::set_cy(const uint8_t cy) { this->cy = cy; }
+void ConditionCodes::set_ac(const uint8_t ac) { this->ac = ac; }
+void ConditionCodes::set_pad(const uint8_t pad) { this->pad = pad; }
+
+void Registers::set_a(const uint8_t a) { this->a = a; }
+void Registers::set_b(const uint8_t b) { this->b = b; }
+void Registers::set_c(const uint8_t c) { this->c = c; }
+void Registers::set_d(const uint8_t d) { this->d = d; }
+void Registers::set_e(const uint8_t e) { this->e = e; }
+void Registers::set_h(const uint8_t h) { this->h = h; }
+void Registers::set_l(const uint8_t l) { this->l = l; }
+void Registers::set_sp(const uint16_t sp) { this->sp = sp; }
+void Registers::set_pc(const uint16_t pc) { this->pc = pc; }
+
 std::ostream& operator<<(std::ostream& os, const ConditionCodes& obj) {
   return os << obj.ToString();
 }
