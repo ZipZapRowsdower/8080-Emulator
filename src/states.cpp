@@ -123,10 +123,11 @@ void State8080::LoadMemory(unsigned char* buffer, int length) {
 }
 
 void State8080::CycleInstruction() {
-  unsigned char *opcode = &this->memory[this->regs.pc];
+  unsigned char *opcode = &this->memory[this->get_pc()];
 
   switch (*opcode)
   {
+/*
     case 0x00: // NOP
       break;
     case 0x01: // LXI B, word
@@ -285,11 +286,12 @@ void State8080::CycleInstruction() {
       this->regs.pc++;
       }
       break;
+*/
     default:
       UnimplementedInstruction(this);
       break;
   }
-  this->regs.pc += 1; // every instruction has an opcode
+  this->set_pc(this->get_pc() + 1); // every instruction has an opcode
 }
 
 void UnimplementedInstruction(State8080* state) {

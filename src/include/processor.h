@@ -28,6 +28,7 @@ class ConditionCodes {
   void set_cy(const uint8_t);
   void set_ac(const uint8_t);
   void set_pad(const uint8_t);
+ private:
   uint8_t z:1;
   uint8_t s:1;
   uint8_t p:1;
@@ -68,6 +69,7 @@ class Registers {
   void set_l(const uint8_t);
   void set_sp(const uint16_t);
   void set_pc(const uint16_t);
+ private:
   uint8_t a;
   uint8_t b;
   uint8_t c;
