@@ -31,7 +31,7 @@ int main (int argc, char** argv) {
   }
 
   while (1) {
-    Disassemble8080Op(state.memory, state.pc);
+    Disassemble8080Op(state.memory, state.regs.pc);
     state.CycleInstruction();
     std::cout << state;
   }

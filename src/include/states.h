@@ -11,10 +11,8 @@ class State8080 {
  public:
    State8080();
    State8080(const State8080&);
-   State8080(const std::vector<uint8_t>, const uint8_t, const uint8_t,
-             const uint8_t, const uint8_t, const uint8_t, const uint8_t,
-             const uint8_t, const uint16_t, const uint16_t,
-             const uint8_t, const ConditionCodes);
+   State8080(const std::vector<uint8_t>, const Registers, const uint8_t,
+             const ConditionCodes);
    friend std::ostream& operator<<(std::ostream&, const State8080&);
    bool operator==(const State8080&) const;
    bool operator!=(const State8080&) const;
@@ -27,17 +25,9 @@ class State8080 {
    std::string ToString() const;
    // TODO: Make private!!!!!
    std::vector<uint8_t> memory;
-   uint8_t a;
-   uint8_t b;
-   uint8_t c;
-   uint8_t d;
-   uint8_t e;
-   uint8_t h;
-   uint8_t l;
-   uint16_t sp;
-   uint16_t pc;
-   ConditionCodes cc;
+   Registers regs;
    uint8_t int_enable;
+   ConditionCodes cc;
 };
 
 void UnimplementedInstruction(State8080*);

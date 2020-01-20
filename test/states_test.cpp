@@ -36,16 +36,17 @@ const static uint8_t pad_2 = 1;
 struct State8080Test : testing::Test {
   State8080* state;
   State8080* state_2;
-  ConditionCodes* cc_2;
   State8080* state_3;
+  ConditionCodes* cc_2;
+  Registers* regs_2;
 
   State8080Test()
   {
     cc_2 = new ConditionCodes(z_2, s_2, p_2, cy_2, ac_2, pad_2);
+    regs_2 = new Registers(a_2, b_2, c_2, d_2, e_2, h_2, l_2, sp_2, pc_2);
 
     state = new State8080;
-    state_2 = new State8080(memory_2, a_2, b_2, c_2, d_2, e_2, h_2, l_2,
-                            sp_2, pc_2, int_enable_2, *cc_2);
+    state_2 = new State8080(memory_2, *regs_2, int_enable_2, *cc_2);
     state_3 = new State8080;
   }
 
@@ -53,8 +54,9 @@ struct State8080Test : testing::Test {
   {
     delete state;
     delete state_2;
-    delete cc_2;
     delete state_3;
+    delete cc_2;
+    delete regs_2;
   }
 };
 
@@ -68,34 +70,16 @@ struct State8080Test : testing::Test {
 ///////////////////////////////////////////////////////////////////
 
 TEST_F(State8080Test, DefaultInitialization) {
-  EXPECT_EQ(0, state->a);
-  EXPECT_EQ(0, state->b);
-  EXPECT_EQ(0, state->c);
-  EXPECT_EQ(0, state->d);
-  EXPECT_EQ(0, state->e);
-  EXPECT_EQ(0, state->h);
-  EXPECT_EQ(0, state->l);
-  EXPECT_EQ(0, state->sp);
-  EXPECT_EQ(0, state->pc);
   EXPECT_EQ(ROM_SIZE, state->memory.size());
   for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state->memory[i]);
   }
-  EXPECT_EQ(true, state->cc.IsClear());
+  EXPECT_EQ(true, state->regs.IsClear());
   EXPECT_EQ(0, state->int_enable);
+  EXPECT_EQ(true, state->cc.IsClear());
 }
 
 TEST_F(State8080Test, FullInitialization) {
-  EXPECT_EQ(a_2, state_2->a);
-  EXPECT_EQ(b_2, state_2->b);
-  EXPECT_EQ(c_2, state_2->c);
-  EXPECT_EQ(d_2, state_2->d);
-  EXPECT_EQ(e_2, state_2->e);
-  EXPECT_EQ(h_2, state_2->h);
-  EXPECT_EQ(l_2, state_2->l);
-  EXPECT_EQ(sp_2, state_2->sp);
-  EXPECT_EQ(pc_2, state_2->pc);
-  EXPECT_EQ(int_enable_2, state_2->int_enable);
   EXPECT_EQ(ROM_SIZE, state_2->memory.size());
   for (unsigned int i = 0; i < memory_2.size(); i++) {
     EXPECT_EQ(memory_2[i], state_2->memory[i]);
@@ -103,27 +87,21 @@ TEST_F(State8080Test, FullInitialization) {
   for (unsigned int i = memory_2.size(); i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
+  EXPECT_EQ(true, regs_2->operator==(state_2->regs));
+  EXPECT_EQ(int_enable_2, state_2->int_enable);
   EXPECT_EQ(true, cc_2->operator==(state_2->cc));
 }
 
 TEST_F(State8080Test, CopyInitialization) {
   State8080* my_state = new State8080(*state_2);
 
-  EXPECT_EQ(state_2->a, my_state->a);
-  EXPECT_EQ(state_2->b, my_state->b);
-  EXPECT_EQ(state_2->c, my_state->c);
-  EXPECT_EQ(state_2->d, my_state->d);
-  EXPECT_EQ(state_2->e, my_state->e);
-  EXPECT_EQ(state_2->h, my_state->h);
-  EXPECT_EQ(state_2->l, my_state->l);
-  EXPECT_EQ(state_2->sp, my_state->sp);
-  EXPECT_EQ(state_2->pc, my_state->pc);
   EXPECT_EQ(state_2->memory.size(), my_state->memory.size());
   for (unsigned int i = 0; i < my_state->memory.size(); i++) {
     EXPECT_EQ(state_2->memory[i], my_state->memory[i]);
   }
-  EXPECT_EQ(true, state_2->cc.operator==(my_state->cc));
+  EXPECT_EQ(true, state_2->regs.operator==(my_state->regs));
   EXPECT_EQ(state_2->int_enable, my_state->int_enable);
+  EXPECT_EQ(true, state_2->cc.operator==(my_state->cc));
 
   // Can this lead to a memory leak?  Google Test should always run the full
   // test, right?...
@@ -132,21 +110,13 @@ TEST_F(State8080Test, CopyInitialization) {
 
 TEST_F(State8080Test, StateFreed) {
   state_2->ClearState();
-  EXPECT_EQ(0, state_2->a);
-  EXPECT_EQ(0, state_2->b);
-  EXPECT_EQ(0, state_2->c);
-  EXPECT_EQ(0, state_2->d);
-  EXPECT_EQ(0, state_2->e);
-  EXPECT_EQ(0, state_2->h);
-  EXPECT_EQ(0, state_2->l);
-  EXPECT_EQ(0, state_2->sp);
-  EXPECT_EQ(0, state_2->pc);
   EXPECT_EQ(ROM_SIZE, state_2->memory.size());
   for (unsigned int i = 0; i < ROM_SIZE; i++) {
     EXPECT_EQ(0x00, state_2->memory[i]);
   }
-  EXPECT_EQ(true, state_2->cc.IsClear());
+  EXPECT_EQ(true, state_2->regs.IsClear());
   EXPECT_EQ(0, state_2->int_enable);
+  EXPECT_EQ(true, state_2->cc.IsClear());
 }
 
 ////////////////////////

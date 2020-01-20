@@ -38,20 +38,20 @@ struct ConditionCodesTest : testing::Test {
 };
 
 struct RegistersTest : testing::Test {
-  Registers* registers_1;
-  Registers* registers_2;
-  Registers* registers_3;
+  Registers* regs_1;
+  Registers* regs_2;
+  Registers* regs_3;
 
   RegistersTest() {
-    registers_1 = new Registers;
-    registers_2 = new Registers(a_2, b_2, c_2, d_2, e_2, h_2, l_2, sp_2, pc_2);
-    registers_3 = new Registers;
+    regs_1 = new Registers;
+    regs_2 = new Registers(a_2, b_2, c_2, d_2, e_2, h_2, l_2, sp_2, pc_2);
+    regs_3 = new Registers;
   }
 
   virtual ~RegistersTest() {
-    delete registers_1;
-    delete registers_2;
-    delete registers_3;
+    delete regs_1;
+    delete regs_2;
+    delete regs_3;
   }
 };
 
@@ -96,43 +96,43 @@ TEST_F(ConditionCodesTest, CopyConstructorInitialization) {
 }
 
 TEST_F(RegistersTest, DefaultRegistersInitialization) {
-  EXPECT_EQ(0x00, registers_1->a);
-  EXPECT_EQ(0x00, registers_1->b);
-  EXPECT_EQ(0x00, registers_1->c);
-  EXPECT_EQ(0x00, registers_1->d);
-  EXPECT_EQ(0x00, registers_1->e);
-  EXPECT_EQ(0x00, registers_1->h);
-  EXPECT_EQ(0x00, registers_1->l);
-  EXPECT_EQ(0x0000, registers_1->sp);
-  EXPECT_EQ(0x0000, registers_1->pc);
+  EXPECT_EQ(0x00, regs_1->a);
+  EXPECT_EQ(0x00, regs_1->b);
+  EXPECT_EQ(0x00, regs_1->c);
+  EXPECT_EQ(0x00, regs_1->d);
+  EXPECT_EQ(0x00, regs_1->e);
+  EXPECT_EQ(0x00, regs_1->h);
+  EXPECT_EQ(0x00, regs_1->l);
+  EXPECT_EQ(0x0000, regs_1->sp);
+  EXPECT_EQ(0x0000, regs_1->pc);
 }
 
 TEST_F(RegistersTest, FullRegistersInitialization) {
-  EXPECT_EQ(a_2, registers_2->a);
-  EXPECT_EQ(b_2, registers_2->b);
-  EXPECT_EQ(c_2, registers_2->c);
-  EXPECT_EQ(d_2, registers_2->d);
-  EXPECT_EQ(e_2, registers_2->e);
-  EXPECT_EQ(h_2, registers_2->h);
-  EXPECT_EQ(l_2, registers_2->l);
-  EXPECT_EQ(sp_2, registers_2->sp);
-  EXPECT_EQ(pc_2, registers_2->pc);
+  EXPECT_EQ(a_2, regs_2->a);
+  EXPECT_EQ(b_2, regs_2->b);
+  EXPECT_EQ(c_2, regs_2->c);
+  EXPECT_EQ(d_2, regs_2->d);
+  EXPECT_EQ(e_2, regs_2->e);
+  EXPECT_EQ(h_2, regs_2->h);
+  EXPECT_EQ(l_2, regs_2->l);
+  EXPECT_EQ(sp_2, regs_2->sp);
+  EXPECT_EQ(pc_2, regs_2->pc);
 }
 
 TEST_F(RegistersTest, CopyConstructorInitialization) {
-  Registers* my_registers = new Registers(*registers_2);
+  Registers* my_regs = new Registers(*regs_2);
 
-  EXPECT_EQ(registers_2->a, my_registers->a);
-  EXPECT_EQ(registers_2->b, my_registers->b);
-  EXPECT_EQ(registers_2->c, my_registers->c);
-  EXPECT_EQ(registers_2->d, my_registers->d);
-  EXPECT_EQ(registers_2->e, my_registers->e);
-  EXPECT_EQ(registers_2->h, my_registers->h);
-  EXPECT_EQ(registers_2->l, my_registers->l);
-  EXPECT_EQ(registers_2->sp, my_registers->sp);
-  EXPECT_EQ(registers_2->pc, my_registers->pc);
+  EXPECT_EQ(regs_2->a, my_regs->a);
+  EXPECT_EQ(regs_2->b, my_regs->b);
+  EXPECT_EQ(regs_2->c, my_regs->c);
+  EXPECT_EQ(regs_2->d, my_regs->d);
+  EXPECT_EQ(regs_2->e, my_regs->e);
+  EXPECT_EQ(regs_2->h, my_regs->h);
+  EXPECT_EQ(regs_2->l, my_regs->l);
+  EXPECT_EQ(regs_2->sp, my_regs->sp);
+  EXPECT_EQ(regs_2->pc, my_regs->pc);
 
-  delete my_registers;
+  delete my_regs;
 }
 
 /////////////////////////////////
@@ -158,14 +158,14 @@ TEST_F(ConditionCodesTest, IsClear) {
 }
 
 TEST_F(RegistersTest, Clear) {
-  registers_2->Clear();
+  regs_2->Clear();
 
-  EXPECT_EQ(true, registers_1->operator==(*registers_2));
+  EXPECT_EQ(true, regs_1->operator==(*regs_2));
 }
 
 TEST_F(RegistersTest, IsClear) {
-  EXPECT_EQ(true, registers_1->IsClear());
-  EXPECT_EQ(false, registers_2->IsClear());
+  EXPECT_EQ(true, regs_1->IsClear());
+  EXPECT_EQ(false, regs_2->IsClear());
 }
 
 ////////////////////////
@@ -186,7 +186,7 @@ TEST_F(ConditionCodesTest, ToString) {
 
 TEST_F(RegistersTest, ToString) {
   std::string expected = "        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
-  std::string actual = registers_2->ToString();
+  std::string actual = regs_2->ToString();
   EXPECT_EQ(expected, actual);
 }
 
@@ -254,52 +254,52 @@ TEST_F(RegistersTest, StreamInsertionOverload) {
   std::string expected = "        A $10 B $22 C $30 D $44 E $50 H $66 L $70 SP $dead PC $beef\n";
 
   std::ostringstream buffer;
-  buffer << *registers_2;
+  buffer << *regs_2;
 
   std::string actual = buffer.str();
   EXPECT_EQ(expected, actual);
 }
 
 TEST_F(RegistersTest, EqualsOperatorOverload) {
-  *registers_3 = *registers_2;
+  *regs_3 = *regs_2;
 
-  EXPECT_EQ(registers_3->a, registers_2->a);
-  EXPECT_EQ(registers_3->b, registers_2->b);
-  EXPECT_EQ(registers_3->c, registers_2->c);
-  EXPECT_EQ(registers_3->d, registers_2->d);
-  EXPECT_EQ(registers_3->e, registers_2->e);
-  EXPECT_EQ(registers_3->h, registers_2->h);
-  EXPECT_EQ(registers_3->l, registers_2->l);
-  EXPECT_EQ(registers_3->sp, registers_2->sp);
-  EXPECT_EQ(registers_3->pc, registers_2->pc);
+  EXPECT_EQ(regs_3->a, regs_2->a);
+  EXPECT_EQ(regs_3->b, regs_2->b);
+  EXPECT_EQ(regs_3->c, regs_2->c);
+  EXPECT_EQ(regs_3->d, regs_2->d);
+  EXPECT_EQ(regs_3->e, regs_2->e);
+  EXPECT_EQ(regs_3->h, regs_2->h);
+  EXPECT_EQ(regs_3->l, regs_2->l);
+  EXPECT_EQ(regs_3->sp, regs_2->sp);
+  EXPECT_EQ(regs_3->pc, regs_2->pc);
 }
 
 TEST_F(RegistersTest, EqualityOperatorOverload) {
-  *registers_3 = *registers_2;
+  *regs_3 = *regs_2;
 
-  EXPECT_EQ(true, registers_1->operator==(*registers_1));
-  EXPECT_EQ(true, registers_2->operator==(*registers_2));
-  EXPECT_EQ(true, registers_3->operator==(*registers_3));
-  EXPECT_EQ(false, registers_1->operator==(*registers_2));
-  EXPECT_EQ(false, registers_2->operator==(*registers_1));
-  EXPECT_EQ(false, registers_1->operator==(*registers_3));
-  EXPECT_EQ(false, registers_3->operator==(*registers_1));
-  EXPECT_EQ(true, registers_2->operator==(*registers_3));
-  EXPECT_EQ(true, registers_3->operator==(*registers_2));
+  EXPECT_EQ(true, regs_1->operator==(*regs_1));
+  EXPECT_EQ(true, regs_2->operator==(*regs_2));
+  EXPECT_EQ(true, regs_3->operator==(*regs_3));
+  EXPECT_EQ(false, regs_1->operator==(*regs_2));
+  EXPECT_EQ(false, regs_2->operator==(*regs_1));
+  EXPECT_EQ(false, regs_1->operator==(*regs_3));
+  EXPECT_EQ(false, regs_3->operator==(*regs_1));
+  EXPECT_EQ(true, regs_2->operator==(*regs_3));
+  EXPECT_EQ(true, regs_3->operator==(*regs_2));
 }
 
 TEST_F(RegistersTest, NotEqualityOperatorOverload) {
-  *registers_3 = *registers_2;
+  *regs_3 = *regs_2;
 
-  EXPECT_EQ(false, registers_1->operator!=(*registers_1));
-  EXPECT_EQ(false, registers_2->operator!=(*registers_2));
-  EXPECT_EQ(false, registers_3->operator!=(*registers_3));
-  EXPECT_EQ(true, registers_1->operator!=(*registers_2));
-  EXPECT_EQ(true, registers_2->operator!=(*registers_1));
-  EXPECT_EQ(true, registers_1->operator!=(*registers_3));
-  EXPECT_EQ(true, registers_3->operator!=(*registers_1));
-  EXPECT_EQ(false, registers_2->operator!=(*registers_3));
-  EXPECT_EQ(false, registers_3->operator!=(*registers_2));
+  EXPECT_EQ(false, regs_1->operator!=(*regs_1));
+  EXPECT_EQ(false, regs_2->operator!=(*regs_2));
+  EXPECT_EQ(false, regs_3->operator!=(*regs_3));
+  EXPECT_EQ(true, regs_1->operator!=(*regs_2));
+  EXPECT_EQ(true, regs_2->operator!=(*regs_1));
+  EXPECT_EQ(true, regs_1->operator!=(*regs_3));
+  EXPECT_EQ(true, regs_3->operator!=(*regs_1));
+  EXPECT_EQ(false, regs_2->operator!=(*regs_3));
+  EXPECT_EQ(false, regs_3->operator!=(*regs_2));
 }
 
 ////////////////////////////
