@@ -65,72 +65,72 @@ struct RegistersTest : testing::Test {
 ///////////////////////////////////////////////////////////////////
 
 TEST_F(ConditionCodesTest, DefaultConditionCodeInitialization) {
-  EXPECT_EQ(0, cc_1->z);
-  EXPECT_EQ(0, cc_1->s);
-  EXPECT_EQ(0, cc_1->p);
-  EXPECT_EQ(0, cc_1->cy);
-  EXPECT_EQ(0, cc_1->ac);
-  EXPECT_EQ(0, cc_1->pad);
+  EXPECT_EQ(0, cc_1->get_z());
+  EXPECT_EQ(0, cc_1->get_s());
+  EXPECT_EQ(0, cc_1->get_p());
+  EXPECT_EQ(0, cc_1->get_cy());
+  EXPECT_EQ(0, cc_1->get_ac());
+  EXPECT_EQ(0, cc_1->get_pad());
 }
 
 TEST_F(ConditionCodesTest, FullConditionCodeInitialization) {
-  EXPECT_EQ(z_2, cc_2->z);
-  EXPECT_EQ(s_2, cc_2->s);
-  EXPECT_EQ(p_2, cc_2->p);
-  EXPECT_EQ(cy_2, cc_2->cy);
-  EXPECT_EQ(ac_2, cc_2->ac);
-  EXPECT_EQ(pad_2, cc_2->pad);
+  EXPECT_EQ(z_2, cc_2->get_z());
+  EXPECT_EQ(s_2, cc_2->get_s());
+  EXPECT_EQ(p_2, cc_2->get_p());
+  EXPECT_EQ(cy_2, cc_2->get_cy());
+  EXPECT_EQ(ac_2, cc_2->get_ac());
+  EXPECT_EQ(pad_2, cc_2->get_pad());
 }
 
 TEST_F(ConditionCodesTest, CopyConstructorInitialization) {
   ConditionCodes* my_cc = new ConditionCodes(*cc_2);
 
-  EXPECT_EQ(cc_2->z, my_cc->z);
-  EXPECT_EQ(cc_2->s, my_cc->s);
-  EXPECT_EQ(cc_2->p, my_cc->p);
-  EXPECT_EQ(cc_2->cy, my_cc->cy);
-  EXPECT_EQ(cc_2->ac, my_cc->ac);
-  EXPECT_EQ(cc_2->pad, my_cc->pad);
+  EXPECT_EQ(cc_2->get_z(), my_cc->get_z());
+  EXPECT_EQ(cc_2->get_s(), my_cc->get_s());
+  EXPECT_EQ(cc_2->get_p(), my_cc->get_p());
+  EXPECT_EQ(cc_2->get_cy(), my_cc->get_cy());
+  EXPECT_EQ(cc_2->get_ac(), my_cc->get_ac());
+  EXPECT_EQ(cc_2->get_pad(), my_cc->get_pad());
 
   delete my_cc;
 }
 
 TEST_F(RegistersTest, DefaultRegistersInitialization) {
-  EXPECT_EQ(0x00, regs_1->a);
-  EXPECT_EQ(0x00, regs_1->b);
-  EXPECT_EQ(0x00, regs_1->c);
-  EXPECT_EQ(0x00, regs_1->d);
-  EXPECT_EQ(0x00, regs_1->e);
-  EXPECT_EQ(0x00, regs_1->h);
-  EXPECT_EQ(0x00, regs_1->l);
-  EXPECT_EQ(0x0000, regs_1->sp);
-  EXPECT_EQ(0x0000, regs_1->pc);
+  EXPECT_EQ(0x00, regs_1->get_a());
+  EXPECT_EQ(0x00, regs_1->get_b());
+  EXPECT_EQ(0x00, regs_1->get_c());
+  EXPECT_EQ(0x00, regs_1->get_d());
+  EXPECT_EQ(0x00, regs_1->get_e());
+  EXPECT_EQ(0x00, regs_1->get_h());
+  EXPECT_EQ(0x00, regs_1->get_l());
+  EXPECT_EQ(0x0000, regs_1->get_sp());
+  EXPECT_EQ(0x0000, regs_1->get_pc());
 }
 
 TEST_F(RegistersTest, FullRegistersInitialization) {
-  EXPECT_EQ(a_2, regs_2->a);
-  EXPECT_EQ(b_2, regs_2->b);
-  EXPECT_EQ(c_2, regs_2->c);
-  EXPECT_EQ(d_2, regs_2->d);
-  EXPECT_EQ(e_2, regs_2->e);
-  EXPECT_EQ(h_2, regs_2->h);
-  EXPECT_EQ(l_2, regs_2->l);
-  EXPECT_EQ(sp_2, regs_2->sp);
-  EXPECT_EQ(pc_2, regs_2->pc);
+  EXPECT_EQ(a_2, regs_2->get_a());
+  EXPECT_EQ(b_2, regs_2->get_b());
+  EXPECT_EQ(c_2, regs_2->get_c());
+  EXPECT_EQ(d_2, regs_2->get_d());
+  EXPECT_EQ(e_2, regs_2->get_e());
+  EXPECT_EQ(h_2, regs_2->get_h());
+  EXPECT_EQ(l_2, regs_2->get_l());
+  EXPECT_EQ(sp_2, regs_2->get_sp());
+  EXPECT_EQ(pc_2, regs_2->get_pc());
 }
 
 TEST_F(RegistersTest, CopyConstructorInitialization) {
   Registers* my_regs = new Registers(*regs_2);
 
-  EXPECT_EQ(regs_2->a, my_regs->a);
-  EXPECT_EQ(regs_2->b, my_regs->b);
-  EXPECT_EQ(regs_2->c, my_regs->c);
-  EXPECT_EQ(regs_2->d, my_regs->d);
-  EXPECT_EQ(regs_2->e, my_regs->e);
-  EXPECT_EQ(regs_2->h, my_regs->h);
-  EXPECT_EQ(regs_2->l, my_regs->l);
-  EXPECT_EQ(regs_2->sp, my_regs->sp);
-  EXPECT_EQ(regs_2->pc, my_regs->pc);
+  EXPECT_EQ(regs_2->get_a(), my_regs->get_a());
+  EXPECT_EQ(regs_2->get_b(), my_regs->get_b());
+  EXPECT_EQ(regs_2->get_c(), my_regs->get_c());
+  EXPECT_EQ(regs_2->get_d(), my_regs->get_d());
+  EXPECT_EQ(regs_2->get_e(), my_regs->get_e());
+  EXPECT_EQ(regs_2->get_h(), my_regs->get_h());
+  EXPECT_EQ(regs_2->get_l(), my_regs->get_l());
+  EXPECT_EQ(regs_2->get_sp(), my_regs->get_sp());
+  EXPECT_EQ(regs_2->get_pc(), my_regs->get_pc());
 
   delete my_regs;
 }
@@ -293,12 +293,12 @@ TEST_F(ConditionCodesTest, StreamInsertionOverload) {
 TEST_F(ConditionCodesTest, EqualsOperatorOverload) {
   *cc_3 = *cc_2;
 
-  EXPECT_EQ(cc_3->z, cc_2->z);
-  EXPECT_EQ(cc_3->s, cc_2->s);
-  EXPECT_EQ(cc_3->p, cc_2->p);
-  EXPECT_EQ(cc_3->cy, cc_2->cy);
-  EXPECT_EQ(cc_3->ac, cc_2->ac);
-  EXPECT_EQ(cc_3->pad, cc_2->pad);
+  EXPECT_EQ(cc_3->get_z(), cc_2->get_z());
+  EXPECT_EQ(cc_3->get_s(), cc_2->get_s());
+  EXPECT_EQ(cc_3->get_p(), cc_2->get_p());
+  EXPECT_EQ(cc_3->get_cy(), cc_2->get_cy());
+  EXPECT_EQ(cc_3->get_ac(), cc_2->get_ac());
+  EXPECT_EQ(cc_3->get_pad(), cc_2->get_pad());
 }
 
 TEST_F(ConditionCodesTest, EqualityOperatorOverload) {
@@ -342,15 +342,15 @@ TEST_F(RegistersTest, StreamInsertionOverload) {
 TEST_F(RegistersTest, EqualsOperatorOverload) {
   *regs_3 = *regs_2;
 
-  EXPECT_EQ(regs_3->a, regs_2->a);
-  EXPECT_EQ(regs_3->b, regs_2->b);
-  EXPECT_EQ(regs_3->c, regs_2->c);
-  EXPECT_EQ(regs_3->d, regs_2->d);
-  EXPECT_EQ(regs_3->e, regs_2->e);
-  EXPECT_EQ(regs_3->h, regs_2->h);
-  EXPECT_EQ(regs_3->l, regs_2->l);
-  EXPECT_EQ(regs_3->sp, regs_2->sp);
-  EXPECT_EQ(regs_3->pc, regs_2->pc);
+  EXPECT_EQ(regs_3->get_a(), regs_2->get_a());
+  EXPECT_EQ(regs_3->get_b(), regs_2->get_b());
+  EXPECT_EQ(regs_3->get_c(), regs_2->get_c());
+  EXPECT_EQ(regs_3->get_d(), regs_2->get_d());
+  EXPECT_EQ(regs_3->get_e(), regs_2->get_e());
+  EXPECT_EQ(regs_3->get_h(), regs_2->get_h());
+  EXPECT_EQ(regs_3->get_l(), regs_2->get_l());
+  EXPECT_EQ(regs_3->get_sp(), regs_2->get_sp());
+  EXPECT_EQ(regs_3->get_pc(), regs_2->get_pc());
 }
 
 TEST_F(RegistersTest, EqualityOperatorOverload) {

@@ -19,12 +19,12 @@ ConditionCodes::ConditionCodes(uint8_t z, uint8_t s, uint8_t p, uint8_t cy,
 }
 
 ConditionCodes::ConditionCodes(const ConditionCodes& obj) {
-  this->z = obj.z;
-  this->s = obj.s;
-  this->p = obj.p;
-  this->cy = obj.cy;
-  this->ac = obj.ac;
-  this->pad = obj.pad;
+  this->z = obj.get_z();
+  this->s = obj.get_s();
+  this->p = obj.get_p();
+  this->cy = obj.get_cy();
+  this->ac = obj.get_ac();
+  this->pad = obj.get_pad();
 }
 
 Registers::Registers() {
@@ -45,33 +45,33 @@ Registers::Registers(uint8_t a, uint8_t b, uint8_t c, uint8_t d, uint8_t e,
 }
 
 Registers::Registers(const Registers& obj) {
-  this->a = obj.a;
-  this->b = obj.b;
-  this->c = obj.c;
-  this->d = obj.d;
-  this->e = obj.e;
-  this->h = obj.h;
-  this->l = obj.l;
-  this->sp = obj.sp;
-  this->pc = obj.pc;
+  this->a = obj.get_a();
+  this->b = obj.get_b();
+  this->c = obj.get_c();
+  this->d = obj.get_d();
+  this->e = obj.get_e();
+  this->h = obj.get_h();
+  this->l = obj.get_l();
+  this->sp = obj.get_sp();
+  this->pc = obj.get_pc();
 }
 
-uint8_t ConditionCodes::get_z() { return this->z; }
-uint8_t ConditionCodes::get_s() { return this->s; }
-uint8_t ConditionCodes::get_p() { return this->p; }
-uint8_t ConditionCodes::get_cy() { return this->cy; }
-uint8_t ConditionCodes::get_ac() { return this->ac; }
-uint8_t ConditionCodes::get_pad() { return this->pad; }
+uint8_t ConditionCodes::get_z() const { return this->z; }
+uint8_t ConditionCodes::get_s() const { return this->s; }
+uint8_t ConditionCodes::get_p() const { return this->p; }
+uint8_t ConditionCodes::get_cy() const { return this->cy; }
+uint8_t ConditionCodes::get_ac() const { return this->ac; }
+uint8_t ConditionCodes::get_pad() const { return this->pad; }
 
-uint8_t Registers::get_a() { return this->a; }
-uint8_t Registers::get_b() { return this->b; }
-uint8_t Registers::get_c() { return this->c; }
-uint8_t Registers::get_d() { return this->d; }
-uint8_t Registers::get_e() { return this->e; }
-uint8_t Registers::get_h() { return this->h; }
-uint8_t Registers::get_l() { return this->l; }
-uint16_t Registers::get_sp() { return this->sp; }
-uint16_t Registers::get_pc() { return this->pc; }
+uint8_t Registers::get_a() const { return this->a; }
+uint8_t Registers::get_b() const { return this->b; }
+uint8_t Registers::get_c() const { return this->c; }
+uint8_t Registers::get_d() const { return this->d; }
+uint8_t Registers::get_e() const { return this->e; }
+uint8_t Registers::get_h() const { return this->h; }
+uint8_t Registers::get_l() const { return this->l; }
+uint16_t Registers::get_sp() const { return this->sp; }
+uint16_t Registers::get_pc() const { return this->pc; }
 
 void ConditionCodes::set_z(const uint8_t z) { this->z = z; }
 void ConditionCodes::set_s(const uint8_t s) { this->s = s; }
@@ -97,23 +97,23 @@ std::ostream& operator<<(std::ostream& os, const ConditionCodes& obj) {
 ConditionCodes& ConditionCodes::operator=(const ConditionCodes& rhs) {
   if (this == &rhs) return *this;
 
-  this->z = rhs.z;
-  this->s = rhs.s;
-  this->p = rhs.p;
-  this->cy = rhs.cy;
-  this->ac = rhs.ac;
-  this->pad = rhs.pad;
+  this->z = rhs.get_z();
+  this->s = rhs.get_s();
+  this->p = rhs.get_p();
+  this->cy = rhs.get_cy();
+  this->ac = rhs.get_ac();
+  this->pad = rhs.get_pad();
 
   return *this;
 }
 
 bool ConditionCodes::operator==(const ConditionCodes& rhs) const {
-  return (this->z == rhs.z) &&
-         (this->s == rhs.s) &&
-         (this->p == rhs.p) &&
-         (this->cy == rhs.cy) &&
-         (this->ac == rhs.ac) &&
-         (this->pad == rhs.pad);
+  return (this->z == rhs.get_z()) &&
+         (this->s == rhs.get_s()) &&
+         (this->p == rhs.get_p()) &&
+         (this->cy == rhs.get_cy()) &&
+         (this->ac == rhs.get_ac()) &&
+         (this->pad == rhs.get_pad());
 }
 
 bool ConditionCodes::operator!=(const ConditionCodes& rhs) const {
@@ -139,29 +139,29 @@ std::ostream& operator<<(std::ostream& os, const Registers& obj) {
 Registers& Registers::operator=(const Registers& rhs) {
   if (this == &rhs) return *this;
 
-  this->a = rhs.a;
-  this->b = rhs.b;
-  this->c = rhs.c;
-  this->d = rhs.d;
-  this->e = rhs.e;
-  this->h = rhs.h;
-  this->l = rhs.l;
-  this->sp = rhs.sp;
-  this->pc = rhs.pc;
+  this->a = rhs.get_a();
+  this->b = rhs.get_b();
+  this->c = rhs.get_c();
+  this->d = rhs.get_d();
+  this->e = rhs.get_e();
+  this->h = rhs.get_h();
+  this->l = rhs.get_l();
+  this->sp = rhs.get_sp();
+  this->pc = rhs.get_pc();
 
   return *this;
 }
 
 bool Registers::operator==(const Registers& rhs) const {
-  return (this->a == rhs.a) &&
-         (this->b == rhs.b) &&
-         (this->c == rhs.c) &&
-         (this->d == rhs.d) &&
-         (this->e == rhs.e) &&
-         (this->h == rhs.h) &&
-         (this->l == rhs.l) &&
-         (this->sp == rhs.sp) &&
-         (this->pc == rhs.pc);
+  return (this->a == rhs.get_a()) &&
+         (this->b == rhs.get_b()) &&
+         (this->c == rhs.get_c()) &&
+         (this->d == rhs.get_d()) &&
+         (this->e == rhs.get_e()) &&
+         (this->h == rhs.get_h()) &&
+         (this->l == rhs.get_l()) &&
+         (this->sp == rhs.get_sp()) &&
+         (this->pc == rhs.get_pc());
 }
 
 bool Registers::operator!=(const Registers& rhs) const {
