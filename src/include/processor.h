@@ -6,6 +6,11 @@
 class ConditionCodes {
  public:
   ConditionCodes();
+  ConditionCodes(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t);
+  ConditionCodes(const ConditionCodes&);
+  ConditionCodes& operator=(const ConditionCodes&);
+  bool operator==(const ConditionCodes&) const;
+  bool operator!=(const ConditionCodes&) const;
   uint8_t z:1;
   uint8_t s:1;
   uint8_t p:1;

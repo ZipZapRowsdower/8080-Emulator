@@ -260,8 +260,11 @@ TEST_F(State8080Test, EqualityOperatorOverload) {
   EXPECT_EQ(true, state_2->operator==(*state_2));
   EXPECT_EQ(true, state_3->operator==(*state_3));
   EXPECT_EQ(false, state->operator==(*state_2));
+  EXPECT_EQ(false, state_2->operator==(*state));
   EXPECT_EQ(false, state->operator==(*state_3));
+  EXPECT_EQ(false, state_3->operator==(*state));
   EXPECT_EQ(true, state_2->operator==(*state_3));
+  EXPECT_EQ(true, state_3->operator==(*state_2));
 }
 
 TEST_F(State8080Test, NotEqualityOperatorOverload) {
@@ -271,8 +274,11 @@ TEST_F(State8080Test, NotEqualityOperatorOverload) {
   EXPECT_EQ(false, state_2->operator!=(*state_2));
   EXPECT_EQ(false, state_3->operator!=(*state_3));
   EXPECT_EQ(true, state->operator!=(*state_2));
+  EXPECT_EQ(true, state_2->operator!=(*state));
   EXPECT_EQ(true, state->operator!=(*state_3));
+  EXPECT_EQ(true, state_3->operator!=(*state));
   EXPECT_EQ(false, state_2->operator!=(*state_3));
+  EXPECT_EQ(false, state_3->operator!=(*state_2));
 }
 
 ////////////////////////////

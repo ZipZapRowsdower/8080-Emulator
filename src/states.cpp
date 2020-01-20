@@ -126,7 +126,6 @@ bool State8080::operator==(const State8080& rhs) const {
          (this->cc.ac == rhs.cc.ac) &&
          (this->cc.pad == rhs.cc.pad) &&
          (this->int_enable == rhs.int_enable);
-  return false;
 }
 
 bool State8080::operator!=(const State8080& rhs) const {
