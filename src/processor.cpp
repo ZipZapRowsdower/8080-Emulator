@@ -1,12 +1,11 @@
 #include "include/processor.h"
 
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+
 ConditionCodes::ConditionCodes() {
-  this->z = 0;
-  this->s = 0;
-  this->p = 0;
-  this->cy = 0;
-  this->ac = 0;
-  this->pad = 0;
+  this->Reset();
 }
 
 ConditionCodes::ConditionCodes(uint8_t z, uint8_t s, uint8_t p, uint8_t cy,
@@ -26,6 +25,10 @@ ConditionCodes::ConditionCodes(const ConditionCodes& obj) {
   this->cy = obj.cy;
   this->ac = obj.ac;
   this->pad = obj.pad;
+}
+
+std::ostream& operator<<(std::ostream& os, const ConditionCodes& obj) {
+  return os << obj.ToString();
 }
 
 ConditionCodes& ConditionCodes::operator=(const ConditionCodes& rhs) {
@@ -52,4 +55,25 @@ bool ConditionCodes::operator==(const ConditionCodes& rhs) const {
 
 bool ConditionCodes::operator!=(const ConditionCodes& rhs) const {
   return !(*this == rhs);
+}
+
+std::string ConditionCodes::ToString() const {
+  std::ostringstream my_string_stream;
+  my_string_stream << std::dec <<
+    "        " <<
+    "C=" << std::setw(1) << static_cast<int>(this->cy) << ", " <<
+    "P=" << std::setw(1) << static_cast<int>(this->p) <<  ", " <<
+    "S=" << std::setw(1) << static_cast<int>(this->s) <<  ", " <<
+    "Z=" << std::setw(1) << static_cast<int>(this->z) <<
+    std::endl;
+  return my_string_stream.str();
+}
+
+void ConditionCodes::Reset() {
+  this->z = 0;
+  this->s = 0;
+  this->p = 0;
+  this->cy = 0;
+  this->ac = 0;
+  this->pad = 0;
 }

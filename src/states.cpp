@@ -25,13 +25,7 @@ State8080::State8080(const State8080& obj) {
   this->memory = obj.memory;
   this->sp = obj.sp;
   this->pc = obj.pc;
-  this->cc.z = obj.cc.z;
-  this->cc.s = obj.cc.s;
-  this->cc.p = obj.cc.p;
-  this->cc.cy = obj.cc.cy;
-  this->cc.ac = obj.cc.ac;
-  this->cc.pad = obj.cc.pad;
-  this->int_enable = obj.int_enable;
+  this->cc = obj.cc;
 }
 
 State8080::State8080(const std::vector<uint8_t> memory, const uint8_t a,
@@ -54,12 +48,7 @@ State8080::State8080(const std::vector<uint8_t> memory, const uint8_t a,
   this->sp = sp;
   this->pc = pc;
   this->int_enable = int_enable;
-  this->cc.z = cc.z;
-  this->cc.s = cc.s;
-  this->cc.p = cc.p;
-  this->cc.cy = cc.cy;
-  this->cc.ac = cc.ac;
-  this->cc.pad = cc.pad;
+  this->cc = cc;
 }
 
 
@@ -76,19 +65,13 @@ void State8080::ClearState() {
   }
   this->sp = 0;
   this->pc = 0;
-  ResetConditionCodes(&this->cc);
+  this->cc.Reset();
   this->int_enable = 0;
 }
 
 std::string State8080::ToString() const {
   std::ostringstream my_string_stream;
-  my_string_stream << std::dec <<
-    "        " <<
-    "C=" << std::setw(1) << static_cast<int>(this->cc.cy) << ", " <<
-    "P=" << std::setw(1) << static_cast<int>(this->cc.p) <<  ", " <<
-    "S=" << std::setw(1) << static_cast<int>(this->cc.s) <<  ", " <<
-    "Z=" << std::setw(1) << static_cast<int>(this->cc.z) <<
-                  std::endl;
+  my_string_stream << this->cc;
   my_string_stream << std::hex << std::setfill('0') <<
     "        " <<
     "A $" << std::setw(2) << static_cast<int>(this->a) << " " <<
@@ -119,12 +102,7 @@ bool State8080::operator==(const State8080& rhs) const {
          (this->memory == rhs.memory) &&
          (this->sp == rhs.sp) &&
          (this->pc == rhs.pc) &&
-         (this->cc.z == rhs.cc.z) &&
-         (this->cc.s == rhs.cc.s) &&
-         (this->cc.p == rhs.cc.p) &&
-         (this->cc.cy == rhs.cc.cy) &&
-         (this->cc.ac == rhs.cc.ac) &&
-         (this->cc.pad == rhs.cc.pad) &&
+         (this->cc == rhs.cc) &&
          (this->int_enable == rhs.int_enable);
 }
 
@@ -145,12 +123,7 @@ State8080& State8080::operator=(const State8080& rhs) {
   this->memory = rhs.memory;
   this->sp = rhs.sp;
   this->pc = rhs.pc;
-  this->cc.z = rhs.cc.z;
-  this->cc.s = rhs.cc.s;
-  this->cc.p = rhs.cc.p;
-  this->cc.cy = rhs.cc.cy;
-  this->cc.ac = rhs.cc.ac;
-  this->cc.pad = rhs.cc.pad;
+  this->cc = rhs.cc;
   this->int_enable = rhs.int_enable;
 
   return *this;
@@ -169,15 +142,6 @@ int State8080::LoadMemory(FILE* f) {
 
 void State8080::LoadMemory(unsigned char* buffer, int length) {
   memcpy(&(this->memory[0]), buffer, length);
-}
-
-void ResetConditionCodes(ConditionCodes* cc) {
-  cc->z = 0;
-  cc->s = 0;
-  cc->p = 0;
-  cc->cy = 0;
-  cc->ac = 0;
-  cc->pad = 0;
 }
 
 void State8080::CycleInstruction() {

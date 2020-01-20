@@ -40,7 +40,6 @@ class State8080 {
    uint8_t int_enable;
 };
 
-void ResetConditionCodes(ConditionCodes*);
 void UnimplementedInstruction(State8080*);
 uint8_t Parity(uint8_t);
 uint8_t parity(uint8_t, uint8_t);

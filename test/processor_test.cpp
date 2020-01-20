@@ -70,6 +70,49 @@ TEST_F(ProcessorTest, CopyConstructorInitialization) {
   delete my_cc;
 }
 
+TEST_F(ProcessorTest, Reset) {
+  cc_2->Reset();
+
+  EXPECT_EQ(true, cc_1->operator==(*cc_2));
+}
+
+////////////////////////
+//  _____    _______  //
+// |_   _|  / /  _  | //
+//   | |   / /| | | | //
+//   | |  / / | | | | //
+//  _| |_/ /  \ \_/ / //
+//  \___/_/    \___/  //
+//                    //
+////////////////////////
+
+TEST_F(ProcessorTest, ToString) {
+  std::string expected = "        C=1, P=1, S=1, Z=1\n";
+  std::string actual = cc_2->ToString();
+  EXPECT_EQ(expected, actual);
+}
+
+////////////////////////////////////////////////////
+//  _____                      _                  //
+// |  _  |                    | |                 //
+// | | | |_ __   ___ _ __ __ _| |_ ___  _ __ ___  //
+// | | | | '_ \ / _ \ '__/ _` | __/ _ \| '__/ __| //
+// \ \_/ / |_) |  __/ | | (_| | || (_) | |  \__ \ //
+//  \___/| .__/ \___|_|  \__,_|\__\___/|_|  |___/ //
+//       | |                                      //
+//       |_|                                      //
+////////////////////////////////////////////////////
+
+TEST_F(ProcessorTest, StreamInsertionOverload) {
+  std::string expected = "        C=1, P=1, S=1, Z=1\n";
+
+  std::ostringstream buffer;
+  buffer << *cc_2;
+
+  std::string actual = buffer.str();
+  EXPECT_EQ(expected, actual);
+}
+
 TEST_F(ProcessorTest, EqualsOperatorOverload) {
   *cc_3 = *cc_2;
 
@@ -108,6 +151,7 @@ TEST_F(ProcessorTest, NotEqualityOperatorOverload) {
   EXPECT_EQ(false, cc_2->operator!=(*cc_3));
   EXPECT_EQ(false, cc_3->operator!=(*cc_2));
 }
+
 
 ////////////////////////////
 // ___  ___      _        //
