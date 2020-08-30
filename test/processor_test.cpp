@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-err58-cpp"
 #include <gtest/gtest.h>
 
 // TODO: Remove relative path
@@ -83,7 +85,7 @@ TEST_F(ConditionCodesTest, FullConditionCodeInitialization) {
 }
 
 TEST_F(ConditionCodesTest, CopyConstructorInitialization) {
-  ConditionCodes* my_cc = new ConditionCodes(*cc_2);
+  auto my_cc = new ConditionCodes(*cc_2);
 
   EXPECT_EQ(cc_2->get_z(), my_cc->get_z());
   EXPECT_EQ(cc_2->get_s(), my_cc->get_s());
@@ -120,7 +122,7 @@ TEST_F(RegistersTest, FullRegistersInitialization) {
 }
 
 TEST_F(RegistersTest, CopyConstructorInitialization) {
-  Registers* my_regs = new Registers(*regs_2);
+  auto my_regs = new Registers(*regs_2);
 
   EXPECT_EQ(regs_2->get_a(), my_regs->get_a());
   EXPECT_EQ(regs_2->get_b(), my_regs->get_b());
@@ -395,3 +397,5 @@ int main(int argc, char* argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
+
+#pragma clang diagnostic pop

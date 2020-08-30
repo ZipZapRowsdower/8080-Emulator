@@ -16,12 +16,11 @@ int main (int argc, char** argv) {
     exit(1);
   }
   FILE *f = fopen(argv[1], "rb");
-  int fsize = 0;
-  if (f==NULL) {
+  if (f == nullptr) {
     std::cout << "error: Couldn't open " << argv[1] << std::endl;
     exit(1);
   }
-  fsize = state.LoadMemory(f);
+  long fsize = state.LoadMemory(f);
   fclose(f);
 
   int pc = 0;
@@ -30,10 +29,13 @@ int main (int argc, char** argv) {
     pc += Disassemble8080Op(state.memory, pc);
   }
 
-  while (1) {
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
+  while (true) {
     Disassemble8080Op(state.memory, state.regs.get_pc());
     state.CycleInstruction();
     std::cout << state;
   }
+#pragma clang diagnostic pop
   return 0;
 }

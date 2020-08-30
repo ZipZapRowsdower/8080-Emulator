@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
-#include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -21,9 +20,9 @@ State8080::State8080(const State8080& obj) {
   this->cc = obj.cc;
 }
 
-State8080::State8080(const std::vector<uint8_t> memory,
-                     const Registers regs, const uint8_t int_enable,
-                     const ConditionCodes cc)
+State8080::State8080(const std::vector<uint8_t>& memory,
+                     const Registers& regs, const uint8_t int_enable,
+                     const ConditionCodes& cc)
                      : memory(ROM_SIZE, 0x00) {
   // TODO: What if memory.size() > ROM_SIZE?
   for (unsigned int i = 0; i < memory.size(); i++) {
@@ -67,8 +66,8 @@ void State8080::set_ac(const uint8_t ac) { this->cc.set_ac(ac); }
 void State8080::set_pad(const uint8_t pad) { this->cc.set_pad(pad); }
 
 void State8080::ClearState() {
-  for (unsigned int i = 0; i < this->memory.size(); i++) {
-    this->memory[i] = 0x00;
+  for (unsigned char & i : this->memory) {
+    i = 0x00;
   }
   this->regs.Clear();
   this->int_enable = 0;
@@ -107,10 +106,10 @@ State8080& State8080::operator=(const State8080& rhs) {
   return *this;
 }
 
-int State8080::LoadMemory(FILE* f) {
+long State8080::LoadMemory(FILE* f) {
   // Get the file size and read it into a memory buffer
   fseek(f, 0L, SEEK_END);
-  int fsize = ftell(f);
+  long fsize = ftell(f);
   fseek(f, 0L, SEEK_SET);
 
   fread(&(this->memory[0]), fsize, 1, f);

@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
-#include <iostream>
 #include <vector>
 
 int Disassemble8080Op(std::vector<uint8_t> codebuffer, int pc) {

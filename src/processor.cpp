@@ -2,7 +2,6 @@
 
 #include <iomanip>
 #include <iostream>
-#include <sstream>
 
 ConditionCodes::ConditionCodes() {
   this->Clear();
@@ -56,39 +55,39 @@ Registers::Registers(const Registers& obj) {
   this->pc = obj.get_pc();
 }
 
-uint8_t ConditionCodes::get_z() const { return this->z; }
-uint8_t ConditionCodes::get_s() const { return this->s; }
-uint8_t ConditionCodes::get_p() const { return this->p; }
-uint8_t ConditionCodes::get_cy() const { return this->cy; }
-uint8_t ConditionCodes::get_ac() const { return this->ac; }
-uint8_t ConditionCodes::get_pad() const { return this->pad; }
+uint8_t ConditionCodes::get_z() const { return z; }
+uint8_t ConditionCodes::get_s() const { return s; }
+uint8_t ConditionCodes::get_p() const { return p; }
+uint8_t ConditionCodes::get_cy() const { return cy; }
+uint8_t ConditionCodes::get_ac() const { return ac; }
+uint8_t ConditionCodes::get_pad() const { return pad; }
 
-uint8_t Registers::get_a() const { return this->a; }
-uint8_t Registers::get_b() const { return this->b; }
-uint8_t Registers::get_c() const { return this->c; }
-uint8_t Registers::get_d() const { return this->d; }
-uint8_t Registers::get_e() const { return this->e; }
-uint8_t Registers::get_h() const { return this->h; }
-uint8_t Registers::get_l() const { return this->l; }
-uint16_t Registers::get_sp() const { return this->sp; }
-uint16_t Registers::get_pc() const { return this->pc; }
+uint8_t Registers::get_a() const { return a; }
+uint8_t Registers::get_b() const { return b; }
+uint8_t Registers::get_c() const { return c; }
+uint8_t Registers::get_d() const { return d; }
+uint8_t Registers::get_e() const { return e; }
+uint8_t Registers::get_h() const { return h; }
+uint8_t Registers::get_l() const { return l; }
+uint16_t Registers::get_sp() const { return sp; }
+uint16_t Registers::get_pc() const { return pc; }
 
-void ConditionCodes::set_z(const uint8_t z) { this->z = z; }
-void ConditionCodes::set_s(const uint8_t s) { this->s = s; }
-void ConditionCodes::set_p(const uint8_t p) { this->p = p; }
-void ConditionCodes::set_cy(const uint8_t cy) { this->cy = cy; }
-void ConditionCodes::set_ac(const uint8_t ac) { this->ac = ac; }
-void ConditionCodes::set_pad(const uint8_t pad) { this->pad = pad; }
+void ConditionCodes::set_z(const uint8_t z_new) { z = z_new; }
+void ConditionCodes::set_s(const uint8_t s_new) { s = s_new; }
+void ConditionCodes::set_p(const uint8_t p_new) { p = p_new; }
+void ConditionCodes::set_cy(const uint8_t cy_new) { cy = cy_new; }
+void ConditionCodes::set_ac(const uint8_t ac_new) { ac = ac_new; }
+void ConditionCodes::set_pad(const uint8_t pad_new) { pad = pad_new; }
 
-void Registers::set_a(const uint8_t a) { this->a = a; }
-void Registers::set_b(const uint8_t b) { this->b = b; }
-void Registers::set_c(const uint8_t c) { this->c = c; }
-void Registers::set_d(const uint8_t d) { this->d = d; }
-void Registers::set_e(const uint8_t e) { this->e = e; }
-void Registers::set_h(const uint8_t h) { this->h = h; }
-void Registers::set_l(const uint8_t l) { this->l = l; }
-void Registers::set_sp(const uint16_t sp) { this->sp = sp; }
-void Registers::set_pc(const uint16_t pc) { this->pc = pc; }
+void Registers::set_a(const uint8_t a_new) { a = a_new; }
+void Registers::set_b(const uint8_t b_new) { b = b_new; }
+void Registers::set_c(const uint8_t c_new) { c = c_new; }
+void Registers::set_d(const uint8_t d_new) { d = d_new; }
+void Registers::set_e(const uint8_t e_new) { e = e_new; }
+void Registers::set_h(const uint8_t h_new) { h = h_new; }
+void Registers::set_l(const uint8_t l_new) { l = l_new; }
+void Registers::set_sp(const uint16_t sp_new) { sp = sp_new; }
+void Registers::set_pc(const uint16_t pc_new) { pc = pc_new; }
 
 std::ostream& operator<<(std::ostream& os, const ConditionCodes& obj) {
   return os << obj.ToString();

@@ -1,3 +1,5 @@
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-err58-cpp"
 #include <iostream>
 #include <string>
 
@@ -93,7 +95,7 @@ TEST_F(State8080Test, FullInitialization) {
 }
 
 TEST_F(State8080Test, CopyInitialization) {
-  State8080* my_state = new State8080(*state_2);
+  auto my_state = new State8080(*state_2);
 
   EXPECT_EQ(state_2->memory.size(), my_state->memory.size());
   for (unsigned int i = 0; i < my_state->memory.size(); i++) {
@@ -224,7 +226,7 @@ TEST_F(State8080Test, LoadMemoryFromBuffer) {
 
 TEST_F(State8080Test, LoadMemoryFromFile) {
   FILE *f = fopen(test_file_name, "rb");
-  if (f==NULL)
+  if (f == nullptr)
   {
       printf("error: Couldn't open %s\n", test_file_name);
       exit(1);
@@ -312,3 +314,5 @@ int main(int argc, char* argv[]) {
   test_file_name = argv[1];
   return RUN_ALL_TESTS();
 }
+
+#pragma clang diagnostic pop
