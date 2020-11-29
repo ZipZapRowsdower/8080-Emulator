@@ -1,4 +1,4 @@
-#include "include/instructions.h"
+#include "instructions.h"
 
 #include <cstdint>
 #include <cstdio>

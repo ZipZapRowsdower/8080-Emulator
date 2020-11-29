@@ -11,4 +11,4 @@ add_subdirectory(googletest)
 include_directories(googletest/googletest/include/)
 enable_testing()
 
-add_subdirectory(src)
+add_subdirectory(retro8080)

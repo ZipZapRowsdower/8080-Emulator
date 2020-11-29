@@ -1,13 +1,13 @@
 include_directories(include)
 
-add_executable(emulator emulator.cpp
-        instructions.cpp
-        libretro.cpp
-        processor.cpp
-        states.cpp)
+add_executable(emulator src/emulator.cpp
+        src/instructions.cpp
+        src/libretro.cpp
+        src/processor.cpp
+        src/states.cpp)
 add_custom_target(run ${PROJECT_SOURCE_DIR}/build/emulator ${PROJECT_SOURCE_DIR}/data/test)
 
-add_library(retro8080 SHARED libretro.cpp)
+add_library(retro8080 SHARED src/libretro.cpp)
 set_target_properties(retro8080 PROPERTIES PUBLIC_HEADER include/libretro.h)
 
 install(TARGETS emulator
