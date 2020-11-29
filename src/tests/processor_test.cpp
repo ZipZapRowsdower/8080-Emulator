@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 
 // TODO: Remove relative path
-#include "../src/include/processor.h"
+#include "processor.h"
 
 const static uint8_t a_2 = 0x10;
 const static uint8_t b_2 = 0x22;

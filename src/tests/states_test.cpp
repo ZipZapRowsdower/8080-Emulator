@@ -6,12 +6,12 @@
 #include <gtest/gtest.h>
 
 // TODO: Remove relative path
-#include "../src/include/states.h"
+#include "states.h"
 
 // TODO: This is hardcoded into two locations!!!!!! BAD!!!!!
 const int ROM_SIZE = 0x2000;
 
-// File name for LoadMemoryFromFile test
+// File name for LoadMemoryFromFile tests
 char* test_file_name;
 
 // Initialization values for state_2
@@ -106,7 +106,7 @@ TEST_F(State8080Test, CopyInitialization) {
   EXPECT_EQ(true, state_2->cc.operator==(my_state->cc));
 
   // Can this lead to a memory leak?  Google Test should always run the full
-  // test, right?...
+  // tests, right?...
   delete(my_state);
 }
 
