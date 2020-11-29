@@ -12,10 +12,21 @@ include_directories("${PROJECT_SOURCE_DIR}/src/include")
 
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
-add_executable(emulator ${SOURCES})
+add_executable(emulator ${PROJECT_SOURCE_DIR}/src/emulator.cpp
+	                ${PROJECT_SOURCE_DIR}/src/instructions.cpp
+			${PROJECT_SOURCE_DIR}/src/libretro.cpp
+			${PROJECT_SOURCE_DIR}/src/processor.cpp
+			${PROJECT_SOURCE_DIR}/src/states.cpp)
 add_custom_target(run ${PROJECT_SOURCE_DIR}/build/emulator ${PROJECT_SOURCE_DIR}/data/test)
 
-install(TARGETS emulator DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+add_library(retro8080 SHARED src/libretro.cpp)
+set_target_properties(retro8080 PROPERTIES PUBLIC_HEADER include/libretro.h)
 
-enable_testing()
-add_subdirectory(test)
+install(TARGETS emulator
+	DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS retro8080
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+#enable_testing()
+#add_subdirectory(test)
