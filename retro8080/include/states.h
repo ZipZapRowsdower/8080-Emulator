@@ -18,8 +18,7 @@ class State8080 {
    State8080& operator=(const State8080&);
 
    void ClearState();
-   long LoadMemory(FILE*);
-   void LoadMemory(unsigned char*, int);
+   void LoadMemory(const void*, size_t);
    void CycleInstruction();
    [[nodiscard]] std::string ToString() const;
    [[nodiscard]] uint8_t get_a() const;

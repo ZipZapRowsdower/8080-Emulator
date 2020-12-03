@@ -106,18 +106,7 @@ State8080& State8080::operator=(const State8080& rhs) {
   return *this;
 }
 
-long State8080::LoadMemory(FILE* f) {
-  // Get the file size and read it into a memory buffer
-  fseek(f, 0L, SEEK_END);
-  long fsize = ftell(f);
-  fseek(f, 0L, SEEK_SET);
-
-  fread(&(this->memory[0]), fsize, 1, f);
-
-  return fsize;
-}
-
-void State8080::LoadMemory(unsigned char* buffer, int length) {
+void State8080::LoadMemory(const void* buffer, size_t length) {
   memcpy(&(this->memory[0]), buffer, length);
 }
 

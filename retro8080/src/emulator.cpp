@@ -1,14 +1,35 @@
-#include "include/emulator.h"
+#include "emulator.h"
 
 #include <cstdlib>
 #include <iostream>
 
-#include "include/instructions.h"
-#include "include/states.h"
+#include "instructions.h"
+#include "states.h"
+
+void run_the_code(const void *data, size_t size) {
+    State8080 state;
+
+    state.LoadMemory(data, size);
+
+    int pc = 0;
+
+    while (pc < size) {
+        pc += Disassemble8080Op(state.memory, pc);
+    }
+
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
+    while (true) {
+        Disassemble8080Op(state.memory, state.regs.get_pc());
+        state.CycleInstruction();
+        std::cout << state;
+    }
+#pragma clang diagnostic pop
+}
 
 int main (int argc, char** argv) {
   // Initialize memory
-  State8080 state;
+  void* data;
 
   // Read ROM file into memory
   if (argc < 2) {
@@ -20,22 +41,16 @@ int main (int argc, char** argv) {
     std::cout << "error: Couldn't open " << argv[1] << std::endl;
     exit(1);
   }
-  long fsize = state.LoadMemory(f);
+
+  // Get the file size and read it into a memory buffer
+  fseek(f, 0L, SEEK_END);
+  size_t size = ftell(f);
+  data = (void*) malloc(size);
+  fseek(f, 0L, SEEK_SET);
+  fread(data, size, 1, f);
   fclose(f);
 
-  int pc = 0;
+  run_the_code(data, size);
 
-  while (pc < fsize) {
-    pc += Disassemble8080Op(state.memory, pc);
-  }
-
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "EndlessLoop"
-  while (true) {
-    Disassemble8080Op(state.memory, state.regs.get_pc());
-    state.CycleInstruction();
-    std::cout << state;
-  }
-#pragma clang diagnostic pop
   return 0;
 }

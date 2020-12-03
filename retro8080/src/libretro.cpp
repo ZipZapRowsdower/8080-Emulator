@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 
+#include "emulator.h"
 #include "libretro.h"
 
 using namespace std;
@@ -109,7 +110,13 @@ RETRO_API bool retro_unserialize(const void* data, size_t size)
 RETRO_API void retro_cheat_reset(void) {}
 RETRO_API void retro_cheat_set(unsigned index, bool enabled, const char *code) {}
 
-RETRO_API bool retro_load_game(const struct retro_game_info *game) { return true; }
+RETRO_API bool retro_load_game(const struct retro_game_info *game)
+        {
+            cout << *game->path << std::endl;
+            cout << static_cast<const char*>(game->data) << std::endl;
+            run_the_code(game->path, game->size);
+            return true;
+        }
 RETRO_API bool retro_load_game_special(unsigned game_type, const struct retro_game_info* game_info, size_t num_info) {return true;}
 RETRO_API void retro_unload_game(void) {}
 
