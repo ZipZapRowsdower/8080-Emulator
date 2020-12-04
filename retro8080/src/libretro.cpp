@@ -1,15 +1,19 @@
+#include "libretro.h"
+
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
 
 #include "emulator.h"
-#include "libretro.h"
+#include "states.h"
 
 using namespace std;
 
 static retro_video_refresh_t video_cb;
 static retro_audio_sample_t audio_cb;
+
+State8080 my_state;
 
 RETRO_API void retro_init(void) {}
 RETRO_API void retro_deinit(void) {}
@@ -93,6 +97,8 @@ RETRO_API void retro_run(void) {
     video_cb(framebuffer, 400, 400, sizeof(unsigned short) * 400);
 
     random_noise(audio_cb);
+
+    run_next_instruction(my_state);
 }
 
 RETRO_API size_t retro_serialize_size(void) {return 1;}
@@ -114,7 +120,7 @@ RETRO_API bool retro_load_game(const struct retro_game_info *game)
         {
             cout << *game->path << std::endl;
             cout << static_cast<const char*>(game->data) << std::endl;
-            run_the_code(game->path, game->size);
+            my_state = load_game_from_rom(game->path, game->size);
             return true;
         }
 RETRO_API bool retro_load_game_special(unsigned game_type, const struct retro_game_info* game_info, size_t num_info) {return true;}
